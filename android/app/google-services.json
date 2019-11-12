@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "685537042384",
+    "firebase_url": "https://breathe-ca4aa.firebaseio.com",
+    "project_id": "breathe-ca4aa",
+    "storage_bucket": "breathe-ca4aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685537042384:android:fe90ab3800cf55b15263d5",
+        "android_client_info": {
+          "package_name": "com.example.breathe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685537042384-7l2lud73q8n2mm8rbjt2a39eaivlgi88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOa57rJrq_nMyU0IrpzCyIo6QVgMd-XsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685537042384-7l2lud73q8n2mm8rbjt2a39eaivlgi88.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
