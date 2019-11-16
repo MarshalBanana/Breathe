@@ -1,25 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 
 class AboutUs extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          automaticallyImplyLeading: true,
-          title: Text("About Us"),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context, false),
-          )),
-      body: Center(
-        child: Container(
-          height: 500,
-          width:  500,
-          child: Text(
-              "We are students of Respatory Therapy, and we are trying to make an app to accomodate to such students where they can find all the resources, information, and experiences to help them prosper in their field and also raise awarness about our relatively unknown career path. "),
-        ),
-      ),
-    );
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+            backgroundColor: Colors.limeAccent[500],
+            automaticallyImplyLeading: true,
+            title: Text(AppLocalizations.of(context).tr('aboutus').toString()),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pop(context, false),
+            )),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(16),
+                height: 500,
+                width: 500,
+                child: SelectableText(
+                  AppLocalizations.of(context).tr('aboutusessay'),
+                ),
+              ),
+              //Image.network(url.toString()),
+            ],
+          ),
+        ));
   }
 }

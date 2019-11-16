@@ -10,16 +10,13 @@ import 'package:breathe/globals.dart';
 class ChewieListItem extends StatefulWidget {
   final VideoPlayerController videoPlayerController;
   final bool looping;
-  //var coursesRef = storageRef.child('courses');
-  //var storage = FirebaseStorage().ref();
-  //var learningRef = prefix0.storageRef.child("learning").child("thumbsup.png");
-  
   var textforCard;
   
   ChewieListItem({
     @required this.videoPlayerController,
     this.looping,
     Key key,
+    this.textforCard
   }) : super(key: key);
 
   @override
@@ -28,7 +25,7 @@ class ChewieListItem extends StatefulWidget {
 
 class _ChewieListItemState extends State<ChewieListItem> {
   ChewieController _chewieController;
-
+  String textforcard;
   @override
   void initState() {
     super.initState();
@@ -54,21 +51,20 @@ class _ChewieListItemState extends State<ChewieListItem> {
       },
     );
   }
-
+  
   @override
   Widget build(BuildContext context) {
-    //print(FirebaseStorage().ref().getPath());
-    //print("****************************************************************************************************************************************************************8");
-    
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
         color: Colors.white60,
         child: Column(
           children: <Widget>[
-            Text("Title Text"),  
+            Text("textforcard"),  
             Chewie(
+              
               controller: _chewieController,
+              
             ),
           ],
         ),

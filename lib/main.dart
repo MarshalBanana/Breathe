@@ -1,6 +1,7 @@
 import 'dart:io';
+import 'package:breathe/adminviewcourse.dart' as prefix0;
+import 'package:breathe/videoUpload.dart';
 import 'package:flutter/material.dart';
-import 'package:breathe/imagetest.dart';
 import 'package:breathe/tilegenerator.dart';
 import 'package:breathe/aboutus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,11 +9,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:breathe/adminviewcourse.dart';
 import 'package:breathe/globals.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:breathe/login.dart';
+import 'package:breathe/signUp.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:async/async.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
+import 'package:breathe/Video_Page.dart';
 
 void main() {
   
@@ -105,10 +107,40 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => new LoginPage()));
+                                builder: (context) => new SignUp()));
                       },
                       child: Container(
                         child: Text(login),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.cloud_upload),
+                    title: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => new VideoUpload()));
+                      },
+                      child: Container(
+                        child: Text("Video Upload"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.cloud_upload),
+                    title: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => VideoPageNew()));
+                      },
+                      child: Container(
+                        child: Text("Video View"),
                       ),
                     ),
                     onTap: () {},
@@ -248,49 +280,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-/*Future _getImageUrl() async {
-      final Future<StorageReference> ref =
-          FirebaseStorage.instance.getReferenceFromUrl('courses/thumbsup.png');
-      dynamic url = await ref.then((doc) => doc.getDownloadURL());
-      print(url);
-    }*/
 
-class AboutUs extends StatelessWidget {
-  // var ref = FirebaseStorage.instance.ref().child('courses/thumbsup.png').getDownloadURL();
-  // no need of the file extension, the name will do fine.
-  //FirebaseStorage storage = FirebaseStorage.instance;
-  //var ref = FirebaseStorage().ref();
-  //var courses = ref.child('courses');
-  //var url = _getImageUrl();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-            backgroundColor: Colors.limeAccent[500],
-            automaticallyImplyLeading: true,
-            title: Text(AppLocalizations.of(context).tr('aboutus').toString()),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context, false),
-            )),
-        body: Center(
-          child: Column(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(16),
-                height: 500,
-                width: 500,
-                child: Text(
-                  AppLocalizations.of(context).tr('aboutusessay'),
-                ),
-              ),
-              //Image.network(url.toString()),
-            ],
-          ),
-        ));
-  }
-}
 
 class NewsPage extends StatelessWidget {
   @override
