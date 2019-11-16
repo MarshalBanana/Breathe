@@ -5,19 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:breathe/globals.dart';
 
-
-
 class ChewieListItem extends StatefulWidget {
   final VideoPlayerController videoPlayerController;
   final bool looping;
   var textforCard;
-  
-  ChewieListItem({
-    @required this.videoPlayerController,
-    this.looping,
-    Key key,
-    this.textforCard
-  }) : super(key: key);
+
+  ChewieListItem(
+      {@required this.videoPlayerController,
+      this.looping,
+      Key key,
+      this.textforCard})
+      : super(key: key);
 
   @override
   _ChewieListItemState createState() => _ChewieListItemState();
@@ -33,13 +31,13 @@ class _ChewieListItemState extends State<ChewieListItem> {
     _chewieController = ChewieController(
       videoPlayerController: widget.videoPlayerController,
       autoInitialize: true,
-      allowFullScreen: true, 
+      allowFullScreen: true,
       aspectRatio: 16 / 9,
-      
+
       //prepare the video to be played and display first frame
-      
+
       looping: widget.looping,
-      
+
       //Errors can occur for example when you try to play video from invalid URL
       errorBuilder: (context, errorMessage) {
         return Center(
@@ -51,24 +49,11 @@ class _ChewieListItemState extends State<ChewieListItem> {
       },
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        color: Colors.white60,
-        child: Column(
-          children: <Widget>[
-            Text("textforcard"),  
-            Chewie(
-              
-              controller: _chewieController,
-              
-            ),
-          ],
-        ),
-      ),
+    return Chewie(
+      controller: _chewieController,
     );
   }
 

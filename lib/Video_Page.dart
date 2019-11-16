@@ -29,12 +29,18 @@ class _VideoPageNewState extends State<VideoPageNew> {
               cacheExtent: 10000,
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {
-                return ChewieListItem(
-                  
-                  textforCard: snapshot.data[index].title,
-                  videoPlayerController:
-                      //snapshot.data[index].url
-                      VideoPlayerController.network(snapshot.data[index].url),
+                return Padding(
+                  padding: EdgeInsets.all(8.0),
+                                  child: Card(
+                    color: Colors.white60,
+                    child: Column(children: <Widget>[
+                      Text(snapshot.data[index].title),
+                      ChewieListItem(
+                        videoPlayerController: VideoPlayerController.network(
+                            snapshot.data[index].url),
+                      ),
+                    ]),
+                  ),
                 );
               },
             );
@@ -45,6 +51,7 @@ class _VideoPageNewState extends State<VideoPageNew> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: futureBuilder,
     );
   }
@@ -72,7 +79,7 @@ class VideoList {
 
   VideoList({this.videoList});
 
-    static List<VideoDetailListItem> parsevideos(videoJSON) {
+  static List<VideoDetailListItem> parsevideos(videoJSON) {
     List<VideoDetailListItem> vList = new List();
     print("videoListmade");
     Iterable<dynamic> vlist = videoJSON["browseVideos"].values;
@@ -81,21 +88,20 @@ class VideoList {
     vlist.forEach((value) {
       print(value);
       vList.add(VideoDetailListItem.fromJson(value));
-      });
+    });
     print(vList);
     return vList;
   }
 
   factory VideoList.fromJSON(Map<dynamic, dynamic> json) {
     print("fromJSON called");
-    return VideoList(videoList : parsevideos(json));
+    return VideoList(videoList: parsevideos(json));
     //print(VideoList);
     //return VideoList(videoList:  parsevideos(json));
   }
 }
 
 class MakeCall {
-
   List<VideoDetailListItem> listItems = [];
   VideoList videoList;
   Future<List<VideoDetailListItem>> firebaseCalls(

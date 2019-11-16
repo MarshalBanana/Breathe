@@ -15,6 +15,8 @@ import 'package:async/async.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 import 'package:breathe/Video_Page.dart';
+import 'package:breathe/pdfUpload.dart';
+import 'package:breathe/imageUpload.dart';
 
 void main() {
   
@@ -131,6 +133,21 @@ class _HomePageState extends State<HomePage> {
                     onTap: () {},
                   ),
                   ListTile(
+                    leading: Icon(Icons.file_upload),
+                    title: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => new PDFUpload()));
+                      },
+                      child: Container(
+                        child: Text("PDF Upload"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  ListTile(
                     leading: Icon(Icons.cloud_upload),
                     title: GestureDetector(
                       onTap: () {
@@ -141,6 +158,21 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: Container(
                         child: Text("Video View"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.cloud_upload),
+                    title: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ImageUpload()));
+                      },
+                      child: Container(
+                        child: Text("Image Upload"),
                       ),
                     ),
                     onTap: () {},

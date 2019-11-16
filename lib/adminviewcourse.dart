@@ -14,6 +14,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:breathe/PDF_list_item.dart';
 import 'package:flutter/services.dart';
 import 'package:breathe/Video_Page.dart';
+import 'package:breathe/PDF_Page.dart';
+import 'package:breathe/Image_Page.dart';
 
 class AdminViewLearning extends StatefulWidget {
   _AdminViewLearningState createState() => _AdminViewLearningState();
@@ -149,7 +151,7 @@ class ImagePage extends StatelessWidget {
 
 class _AdminViewLearningState extends State<AdminViewLearning> {
   int selected_page = 0;
-  final pageOptions = [VideoPageNew(), PDFPage(), ImagePage()];
+  final pageOptions = [VideoPageNew(), PDFPageNew(), ImagePageNew()];
   @override
   
   Widget build(BuildContext context) {
