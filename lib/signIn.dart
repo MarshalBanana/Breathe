@@ -1,20 +1,23 @@
+import 'package:breathe/main.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:breathe/globals.dart';
 
-class VideoUpload extends StatefulWidget {
+class SignIn extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _VideoUploadState();
+  State<StatefulWidget> createState() => new _SignInState();
 }
 
-class _VideoUploadState extends State<VideoUpload> {
+class _SignInState extends State<SignIn> {
   final formKey = new GlobalKey<FormState>();
 
-  String _title;
-  String _url;
+  String _email;
+  String _password;
+  //String _name;
+  //var signed = true;
   //FirebaseDatabase database = FirebaseDatabase.instance;
 
-  final databaseReference = FirebaseDatabase.instance.reference();
+  //final databaseReference = FirebaseDatabase.instance.reference();
 
   void validateAndSave() {
     final form = formKey.currentState;
@@ -23,32 +26,32 @@ class _VideoUploadState extends State<VideoUpload> {
     //ref.set("");
 
     form.save();
-    /*if (form.validate()) {
-      print("Form is valid. Email: $_email, name: $_name");
+    if (form.validate()) {
+      print("Form is valid. Email: $_email, password: $_password");
       authenticate();
-      setState(() {
-        signed = true;
-      });
+      setState(() {});
     } else {
-      print("Form is invalid. Email: $_email, name: $_name");
-    }*/
+      print("Form is invalid. Email: $_email, password: $_password");
+    }
   }
 
   void authenticate() {
-    //if ((_email == "raghad.995@gmail.com" && _password == "12345678") ||
-      //  (_email == "test123" && _password == "test123")) {
+    if ((_email == "raghad.995@gmail.com" && _password == "12345678") ||
+        (_email == "test123" && _password == "test123")) {
+      signed = true;
+      print("You have logged in");
       Fluttertoast.showToast(
-          msg: "Record was Created",
+          msg: "Signed In",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIos: 2,
           backgroundColor: Colors.limeAccent[500],
           textColor: Colors.white,
           fontSize: 16.0);
-      FocusScope.of(context).requestFocus(FocusNode());
-      Navigator.pop(context); //signed = true;
-      Navigator.pop(context);
-    
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => new MyHome()));
+    }
+
     /*} else {
       print("The user name or password is not correct");
       Fluttertoast.showToast(
@@ -62,24 +65,18 @@ class _VideoUploadState extends State<VideoUpload> {
     }*/
   }
 
+  /*bool ifSigned() {
+    return signed;
+  }*/
 
-
-  void createRecord() {
+  /*void createRecord() {
     validateAndSave();
-    databaseReference.child("Videos").child("browseVideos").push().set({
-      'title': this._title,
-      'url': this._url
+    databaseReference.child("Emails").push().set({
+      'Full_Name': this._name,
+      'Email': this._email
     });
-    Fluttertoast.showToast(
-          msg: (_title + " uploaded"),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIos: 2,
-          backgroundColor: Colors.limeAccent[500],
-          textColor: Colors.white,
-          fontSize: 16.0);
     
-  }
+  }*/
   //for showing the pop up of invalid details when failure attempted login
   /*void showAlert(BuildContext context) {
     showDialog(
@@ -95,7 +92,7 @@ class _VideoUploadState extends State<VideoUpload> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.lime[500],
-        title: new Text("Upload Videos"),
+        title: new Text("Sign In to Breathe"),
       ),
       body: new Container(
         padding: EdgeInsets.all(20),
@@ -108,20 +105,20 @@ class _VideoUploadState extends State<VideoUpload> {
                 height: 50,
               ),
               new TextFormField(
-                  decoration: new InputDecoration(labelText: 'Title'),
-                  onSaved: (value) => _title = value,
+                  decoration: new InputDecoration(labelText: 'Email'),
+                  onSaved: (value) => _email = value,
                   validator: (value) =>
-                      value.isEmpty ? 'Title cant be empty' : null),
+                      value.isEmpty ? 'Email cant be empty' : null),
               new TextFormField(
-                decoration: new InputDecoration(labelText: 'Url'),
-                onSaved: (value) => _url = value,
+                decoration: new InputDecoration(labelText: 'Name'),
+                onSaved: (value) => _password = value,
                 validator: (value) =>
-                    value.isEmpty ? 'Url cant be empty' : null,
+                    value.isEmpty ? 'Password cant be empty' : null,
               ),
               new RaisedButton(
                 color: Colors.limeAccent[500],
-                child: Text('Upload', style: TextStyle(fontSize: 20.0)),
-                onPressed: createRecord,
+                child: Text('Sign In', style: TextStyle(fontSize: 20.0)),
+                onPressed: validateAndSave,
               )
             ],
           ),

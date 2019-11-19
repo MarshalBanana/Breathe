@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:breathe/UserViewLearning.dart';
 import 'package:breathe/adminviewcourse.dart' as prefix0;
+import 'package:breathe/signIn.dart';
 import 'package:breathe/videoUpload.dart';
 import 'package:flutter/material.dart';
 import 'package:breathe/tilegenerator.dart';
@@ -19,9 +21,7 @@ import 'package:breathe/pdfUpload.dart';
 import 'package:breathe/imageUpload.dart';
 
 void main() {
-  
-
-SystemChrome.setEnabledSystemUIOverlays([]);
+  SystemChrome.setEnabledSystemUIOverlays([]);
   runApp(EasyLocalization(child: MyHome()));
 }
 
@@ -72,6 +72,7 @@ class _HomePageState extends State<HomePage> {
     String aboutus = AppLocalizations.of(context).tr('aboutus').toString();
     String courses = AppLocalizations.of(context).tr('courses').toString();
     String login = AppLocalizations.of(context).tr('login').toString();
+    String signup = AppLocalizations.of(context).tr('signup').toString();
 
     var data = EasyLocalizationProvider.of(context).data;
     return EasyLocalizationProvider(
@@ -112,71 +113,27 @@ class _HomePageState extends State<HomePage> {
                                 builder: (context) => new SignUp()));
                       },
                       child: Container(
+                        child: Text(signup),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  
+                  
+                  ListTile(
+                    leading: Icon(Icons.account_circle),
+                    title: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => SignIn()));
+                      },
+                      child: Container(
                         child: Text(login),
                       ),
                     ),
                     onTap: () {},
                   ),
-                  ListTile(
-                    leading: Icon(Icons.cloud_upload),
-                    title: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => new VideoUpload()));
-                      },
-                      child: Container(
-                        child: Text("Video Upload"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.file_upload),
-                    title: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => new PDFUpload()));
-                      },
-                      child: Container(
-                        child: Text("PDF Upload"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.cloud_upload),
-                    title: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => VideoPageNew()));
-                      },
-                      child: Container(
-                        child: Text("Video View"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.cloud_upload),
-                    title: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ImageUpload()));
-                      },
-                      child: Container(
-                        child: Text("Image Upload"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
+                  
                   ListTile(
                     leading: Icon(Icons.language),
                     title: Text('Change Language to Arabic'),
@@ -216,12 +173,11 @@ class _HomePageState extends State<HomePage> {
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                    ),
+                ),
               ),
               Column(
                 children: <Widget>[
                   new Container(
-                    
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.fill,
@@ -251,10 +207,16 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                         child: GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => new AdminViewLearning()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          if (signed) {
+                            return AdminViewLearning();
+                          }
+                          else{
+                            return UserViewLearning();
+                          }
+                          
+                        }));
 
                         /*else {
                         Navigator.push(
@@ -311,8 +273,6 @@ class _HomePageState extends State<HomePage> {
             ])));
   }
 }
-
-
 
 class NewsPage extends StatelessWidget {
   @override

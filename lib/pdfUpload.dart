@@ -71,7 +71,16 @@ class _PDFUploadState extends State<PDFUpload> {
       'title': this._title,
       'subtitle': this._subtitle,
       'url': this._url
-    });
+    }
+    );
+    Fluttertoast.showToast(
+          msg: (_title + " uploaded"),
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIos: 2,
+          backgroundColor: Colors.limeAccent[500],
+          textColor: Colors.white,
+          fontSize: 16.0);
     
   }
   //for showing the pop up of invalid details when failure attempted login

@@ -18,7 +18,14 @@ class _ImagePageNewState extends State<ImagePageNew> {
         case ConnectionState.none:
           return new Text('Press button to start');
         case ConnectionState.waiting:
-          return new Text('Loading Images....');
+          return Center(
+            child: Column(
+              children: <Widget>[
+                new Text('Just a Sec...' ,style: TextStyle(fontSize: 30,color: Colors.black,fontWeight: FontWeight.bold),),
+                Image.asset("assets/breathe.gif")
+              ],
+            ),
+          );
         default:
           if (snapshot.hasError)
             return new Text('Error: ${snapshot.error}');

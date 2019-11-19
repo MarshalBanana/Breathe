@@ -40,6 +40,14 @@ class _ImageUploadState extends State<ImageUpload> {
     databaseReference.child("Images").push().set({
       'url': this._url
     });
+    Fluttertoast.showToast(
+          msg: "Image uploaded",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIos: 2,
+          backgroundColor: Colors.limeAccent[500],
+          textColor: Colors.white,
+          fontSize: 16.0);
     
   }
 
