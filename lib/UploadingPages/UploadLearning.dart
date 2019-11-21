@@ -1,6 +1,6 @@
-import 'package:breathe/imageUpload.dart';
-import 'package:breathe/pdfUpload.dart';
-import 'package:breathe/videoUpload.dart';
+import 'package:breathe/UploadingPages/imageUpload.dart';
+import 'package:breathe/UploadingPages/pdfUpload.dart';
+import 'package:breathe/UploadingPages/videoUpload.dart';
 import 'package:flutter/material.dart';
 
 class UploadLearning extends StatelessWidget {

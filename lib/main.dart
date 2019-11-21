@@ -1,14 +1,17 @@
 import 'dart:io';
+import 'package:breathe/CoursesPageAdmin.dart';
+import 'package:breathe/CoursesPageUser.dart';
+import 'package:breathe/JobsPageAdmin.dart';
+import 'package:breathe/RespaTherapy.dart';
 import 'package:breathe/UserViewLearning.dart';
-import 'package:breathe/adminviewcourse.dart' as prefix0;
 import 'package:breathe/signIn.dart';
-import 'package:breathe/videoUpload.dart';
+import 'package:breathe/UploadingPages/videoUpload.dart';
 import 'package:flutter/material.dart';
 import 'package:breathe/tilegenerator.dart';
 import 'package:breathe/aboutus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:breathe/adminviewcourse.dart';
+import 'package:breathe/AdminViewLearning.dart';
 import 'package:breathe/globals.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:breathe/signUp.dart';
@@ -17,8 +20,10 @@ import 'package:async/async.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 import 'package:breathe/Video_Page.dart';
-import 'package:breathe/pdfUpload.dart';
-import 'package:breathe/imageUpload.dart';
+import 'package:breathe/UploadingPages/pdfUpload.dart';
+import 'package:breathe/UploadingPages/imageUpload.dart';
+import 'package:breathe/JobsPage.dart';
+import 'package:breathe/JobsPageUser.dart';
 
 void main() {
   SystemChrome.setEnabledSystemUIOverlays([]);
@@ -118,8 +123,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onTap: () {},
                   ),
-                  
-                  
                   ListTile(
                     leading: Icon(Icons.account_circle),
                     title: GestureDetector(
@@ -133,7 +136,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                     onTap: () {},
                   ),
-                  
                   ListTile(
                     leading: Icon(Icons.language),
                     title: Text('Change Language to Arabic'),
@@ -190,10 +192,13 @@ class _HomePageState extends State<HomePage> {
                   Row(children: <Widget>[
                     Expanded(
                         child: GestureDetector(
-                      child: TileManager(
-                        whatsrespa,
-                        "assets/respatherapy.png",
-                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RespaTherapy()));
+                      },
+                      child: TileManager(whatsrespa, "assets/respatherapy.png"),
                     )),
                     Expanded(
                         child: GestureDetector(
@@ -211,11 +216,9 @@ class _HomePageState extends State<HomePage> {
                             MaterialPageRoute(builder: (context) {
                           if (signed) {
                             return AdminViewLearning();
-                          }
-                          else{
+                          } else {
                             return UserViewLearning();
                           }
-                          
                         }));
 
                         /*else {
@@ -237,10 +240,14 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                           child: GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => JobsPage()));
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  if (signed) {
+                                    return JobsPageAdmin();
+                                  } else {
+                                    return JobPageUser();
+                                  }
+                                }));
                               },
                               child: new TileManager(jobs, "assets/jobs.png"))),
                       Expanded(
@@ -248,10 +255,14 @@ class _HomePageState extends State<HomePage> {
                               onTap: () {},
                               child: GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => CoursesPage()));
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    if (signed) {
+                                      return CoursesPageAdmin();
+                                    } else {
+                                      return CoursesPageUser();
+                                    }
+                                  }));
                                 },
                                 child: new TileManager(
                                     courses, "assets/courses.png"),
@@ -294,56 +305,6 @@ class NewsPage extends StatelessWidget {
             width: 500,
             child: Text(
                 "This is where I will put the news, it will be in the form of a list view where u can scrolldown and get the headlines and the date of posting for example."),
-          ),
-        ));
-  }
-}
-
-class JobsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-            backgroundColor: Colors.limeAccent[500],
-            automaticallyImplyLeading: true,
-            title: Text(AppLocalizations.of(context).tr('jobs').toString()),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context, false),
-            )),
-        body: Center(
-          child: Container(
-            padding: EdgeInsets.all(16),
-            height: 500,
-            width: 500,
-            child: Text(
-                "This is where I will put the list of jobs, it will be in the form of a list view where you can scrolldown and get the job title and maybe a date with a snippet of the description before you tap on it and get taken to the page of the job with all the info."),
-          ),
-        ));
-  }
-}
-
-class CoursesPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-            backgroundColor: Colors.limeAccent[500],
-            automaticallyImplyLeading: true,
-            title: Text(AppLocalizations.of(context).tr('courses').toString()),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context, false),
-            )),
-        body: Center(
-          child: Container(
-            padding: EdgeInsets.all(16),
-            height: 500,
-            width: 500,
-            child: Text(
-                "This is where I will put the list of jobs, it will be in the form of a list view where you can scrolldown and get the course title and and outline of that course."),
           ),
         ));
   }

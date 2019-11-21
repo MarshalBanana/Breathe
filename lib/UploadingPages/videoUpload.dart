@@ -1,19 +1,18 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-class SignUp extends StatefulWidget {
+class VideoUpload extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _SignUpState();
+  State<StatefulWidget> createState() => new _VideoUploadState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _VideoUploadState extends State<VideoUpload> {
   final formKey = new GlobalKey<FormState>();
 
-  String _email;
-  String _password;
-  String _name;
-  var signed = true;
+  String _title;
+  String _url;
   //FirebaseDatabase database = FirebaseDatabase.instance;
 
   final databaseReference = FirebaseDatabase.instance.reference();
@@ -25,7 +24,7 @@ class _SignUpState extends State<SignUp> {
     //ref.set("");
 
     form.save();
-    if (form.validate()) {
+    /*if (form.validate()) {
       print("Form is valid. Email: $_email, name: $_name");
       authenticate();
       setState(() {
@@ -33,14 +32,12 @@ class _SignUpState extends State<SignUp> {
       });
     } else {
       print("Form is invalid. Email: $_email, name: $_name");
-    }
+    }*/
   }
 
   void authenticate() {
     //if ((_email == "raghad.995@gmail.com" && _password == "12345678") ||
       //  (_email == "test123" && _password == "test123")) {
-      signed = true;
-      print("You have logged in");
       Fluttertoast.showToast(
           msg: "Record was Created",
           toastLength: Toast.LENGTH_SHORT,
@@ -50,10 +47,9 @@ class _SignUpState extends State<SignUp> {
           textColor: Colors.white,
           fontSize: 16.0);
       FocusScope.of(context).requestFocus(FocusNode());
+      Navigator.pop(context); //signed = true;
       Navigator.pop(context);
-      signed = true;
-      Navigator.pop(context);
-      signed = true;
+    
     /*} else {
       print("The user name or password is not correct");
       Fluttertoast.showToast(
@@ -67,18 +63,16 @@ class _SignUpState extends State<SignUp> {
     }*/
   }
 
-  bool ifSigned() {
-    return signed;
-  }
+
 
   void createRecord() {
     validateAndSave();
-    databaseReference.child("Emails").push().set({
-      'Full_Name': this._name,
-      'Email': this._email
+        databaseReference.child("Videos").child("browseVideos").push().set({
+      'title': this._title,
+      'url': this._url
     });
     Fluttertoast.showToast(
-          msg: ( _email + " has been added to the database"),
+          msg: (_title + " uploaded"),
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIos: 2,
@@ -102,7 +96,7 @@ class _SignUpState extends State<SignUp> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.lime[500],
-        title: new Text("Sign In to Breathe"),
+        title: new Text("Upload Videos"),
       ),
       body: new Container(
         padding: EdgeInsets.all(20),
@@ -115,19 +109,19 @@ class _SignUpState extends State<SignUp> {
                 height: 50,
               ),
               new TextFormField(
-                  decoration: new InputDecoration(labelText: 'Email'),
-                  onSaved: (value) => _email = value,
+                  decoration: new InputDecoration(labelText: 'Title'),
+                  onSaved: (value) => _title = value,
                   validator: (value) =>
-                      value.isEmpty ? 'Email cant be empty' : null),
+                      value.isEmpty ? 'Title cant be empty' : null),
               new TextFormField(
-                decoration: new InputDecoration(labelText: 'Name'),
-                onSaved: (value) => _name = value,
+                decoration: new InputDecoration(labelText: 'Url'),
+                onSaved: (value) => _url = value,
                 validator: (value) =>
-                    value.isEmpty ? 'Name cant be empty' : null,
+                    value.isEmpty ? 'Url cant be empty' : null,
               ),
               new RaisedButton(
                 color: Colors.limeAccent[500],
-                child: Text('Sign Up', style: TextStyle(fontSize: 20.0)),
+                child: Text('Upload', style: TextStyle(fontSize: 20.0)),
                 onPressed: createRecord,
               )
             ],

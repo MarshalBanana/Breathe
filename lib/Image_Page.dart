@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:breathe/adminviewcourse.dart';
+import 'package:breathe/AdminViewLearning.dart';
 
 class ImagePageNew extends StatefulWidget {
   ImagePageNew({Key key}) : super(key: key);

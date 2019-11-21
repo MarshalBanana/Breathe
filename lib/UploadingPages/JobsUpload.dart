@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-class VideoUpload extends StatefulWidget {
+class JobsUpload extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _VideoUploadState();
+  State<StatefulWidget> createState() => new _JobsUploadState();
 }
 
-class _VideoUploadState extends State<VideoUpload> {
+class _JobsUploadState extends State<JobsUpload> {
   final formKey = new GlobalKey<FormState>();
 
-  String _title;
-  String _url;
+  String _jobTitle;
+  String _company;
+  String _websiteLink;
   //FirebaseDatabase database = FirebaseDatabase.instance;
 
   final databaseReference = FirebaseDatabase.instance.reference();
@@ -66,12 +67,14 @@ class _VideoUploadState extends State<VideoUpload> {
 
   void createRecord() {
     validateAndSave();
-    databaseReference.child("Videos").child("browseVideos").push().set({
-      'title': this._title,
-      'url': this._url
-    });
+    databaseReference.child("Jobs").push().set({
+      'jobTitle': this._jobTitle,
+      'company': this._company,
+      'websiteLink': this._websiteLink
+    }
+    );
     Fluttertoast.showToast(
-          msg: (_title + " uploaded"),
+          msg: (_jobTitle + " uploaded"),
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
           timeInSecForIos: 2,
@@ -95,7 +98,7 @@ class _VideoUploadState extends State<VideoUpload> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.lime[500],
-        title: new Text("Upload Videos"),
+        title: new Text("Jobs"),
       ),
       body: new Container(
         padding: EdgeInsets.all(20),
@@ -108,15 +111,20 @@ class _VideoUploadState extends State<VideoUpload> {
                 height: 50,
               ),
               new TextFormField(
-                  decoration: new InputDecoration(labelText: 'Title'),
-                  onSaved: (value) => _title = value,
+                  decoration: new InputDecoration(labelText: 'Job Title'),
+                  onSaved: (value) => _jobTitle = value,
                   validator: (value) =>
-                      value.isEmpty ? 'Title cant be empty' : null),
+                      value.isEmpty ? 'Job Title cant be empty' : null),
+                      new TextFormField(
+                  decoration: new InputDecoration(labelText: 'Company'),
+                  onSaved: (value) => _company = value,
+                  validator: (value) =>
+                      value.isEmpty ? 'Company cant be empty' : null),
               new TextFormField(
-                decoration: new InputDecoration(labelText: 'Url'),
-                onSaved: (value) => _url = value,
+                decoration: new InputDecoration(labelText: 'Website Link'),
+                onSaved: (value) => _websiteLink = value,
                 validator: (value) =>
-                    value.isEmpty ? 'Url cant be empty' : null,
+                    value.isEmpty ? 'Website Link cant be empty' : null,
               ),
               new RaisedButton(
                 color: Colors.limeAccent[500],

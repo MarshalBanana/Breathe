@@ -1,19 +1,9 @@
-import 'dart:math';
-import 'package:breathe/UploadLearning.dart';
+
+import 'package:breathe/UploadingPages/UploadLearning.dart';
 import 'package:breathe/chewie_list_item.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'dart:typed_data';
-import 'dart:io';
-import 'dart:async';
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart' as prefix0;
-import 'package:video_player/video_player.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:breathe/PDF_list_item.dart';
-import 'package:flutter/services.dart';
 import 'package:breathe/Video_Page.dart';
 import 'package:breathe/PDF_Page.dart';
 import 'package:breathe/Image_Page.dart';
