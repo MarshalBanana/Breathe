@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:breathe/CoursesPageAdmin.dart';
 import 'package:breathe/CoursesPageUser.dart';
 import 'package:breathe/JobsPageAdmin.dart';
+import 'package:breathe/NewsPageAdmin.dart';
+import 'package:breathe/NewsPageUser.dart';
 import 'package:breathe/RespaTherapy.dart';
 import 'package:breathe/UserViewLearning.dart';
 import 'package:breathe/signIn.dart';
@@ -201,14 +203,18 @@ class _HomePageState extends State<HomePage> {
                       child: TileManager(whatsrespa, "assets/respatherapy.png"),
                     )),
                     Expanded(
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => new NewsPage()));
-                            },
-                            child: new TileManager(news, "assets/news.png"))),
+                          child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  if (signed) {
+                                    return NewsPageAdmin();
+                                  } else {
+                                    return NewsPageUser();
+                                  }
+                                }));
+                              },
+                              child: new TileManager(news, "assets/news.png"))),
                     Expanded(
                         child: GestureDetector(
                       onTap: () {
@@ -220,14 +226,6 @@ class _HomePageState extends State<HomePage> {
                             return UserViewLearning();
                           }
                         }));
-
-                        /*else {
-                        Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => new ViewCourse()));
-
-                      }*/
                       },
                       child: TileManager(learning, "assets/learning.png"),
                     ))
@@ -282,30 +280,5 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ])));
-  }
-}
-
-class NewsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-            backgroundColor: Colors.limeAccent[500],
-            automaticallyImplyLeading: true,
-            title: Text(AppLocalizations.of(context).tr('news').toString()),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context, false),
-            )),
-        body: Center(
-          child: Container(
-            padding: EdgeInsets.all(16),
-            height: 500,
-            width: 500,
-            child: Text(
-                "This is where I will put the news, it will be in the form of a list view where u can scrolldown and get the headlines and the date of posting for example."),
-          ),
-        ));
   }
 }
