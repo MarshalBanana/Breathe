@@ -1,0 +1,20 @@
+easy_localization: ^1.3.1 = no native integration needed     
+  flutter_launcher_icons: "^0.7.3" =no native integration needed
+  chewie: ^0.9.8 = no native integration needed
+  video_player: ^0.10.2 = IOS change <project root>/ios/Runner/Info.plist
+  firebase_storage: ^3.0.6
+  fluttertoast: ^3.1.3 = no native integration needed.
+  flutter_plugin_pdf_viewer: ^1.0.7 = no native integration needed (dont use it anyway).
+  url_launcher: ^5.2.5 = no native integration needed.
+  firebase_messaging: ^5.1.8
+  
+  
+
+
+flutter_icons:
+  image_path: "assets/icon.png"
+  android: true 
+  ios: true
+
+
+android/app/gradle/gradle-wrapper.properties change the gradle link

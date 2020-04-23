@@ -1,0 +1,40 @@
+First  i copied lib and assets
+Then i changed the medicalapp path for importing to breathe
+Then i commented out the testimage.dart file because i didnt import firebase yet
+i also added the dependency of app localization
+lets try to build!!!
+
+Added the icon dependency 
+Everything seems stable, build is fine, and icon changed.
+
+
+Added CoursesPage, JobPage, and NewsPage to the main pageg as filler for the icons so when you tap it it works.
+
+In the learning material page i made a separate call for material
+
+TODO
+Add chewie and make it play from the bucket
+Test to see if it works
+
+added chiewi and video_player dependencies and it builds fine
+
+made globals.dart and imported to main
+
+Followed the chewie tutorial and added a video not sure if it works yet.
+it worked :DDDD
+
+now build apk release and put it in the drive just incase 
+
+created back up in backup2 with the latest being this^
+changed wrapper gradle properties so that tha tgardle link is a link and works will try to compile.
+
+added firebase storage dependency in android app level gradle, the 19.0.1 version crashed the app so i degraded to 16 i think.
+Now trying to make the storage ref work..
+
+added plugin dependencies in gradle files and had to change the version of the google plugin to 4.0.2 instead of 4.3.2 for it to work. 
+Also changed the name of the app in googleplay services to breathe instead of medicalapp.
+
+builds fine but now the videos get bugged if i full screen.
+
+added something about lint in adnroid build gradle under android
+
